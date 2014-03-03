@@ -17,19 +17,8 @@
     ],
     "repositories": [
         {
-            "type": "package",
-            "package": {
-                "name": "onelogin/php-saml",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://github.com/onelogin/php-saml",
-                    "type": "git",
-                    "reference": "origin/master"
-                },
-                "autoload": {
-                    "psr-0": { "OneLogin_Saml_": "src/OneLogin/Saml/" }
-                }
-            }
+            "type": "vcs",
+            "url": "https://github.com/uq-its-ss/php-saml"
         }
     ],
     "require": {
@@ -38,7 +27,7 @@
         "symfony/framework-bundle": "~2.1",
         "symfony/twig-bundle": "~2.1",
         "symfony/security-bundle": "~2.1",
-        "onelogin/php-saml": "dev-master"
+        "onelogin/php-saml": "dev-composer"
     },
     "require-dev": {
         "symfony/browser-kit": "~2.1",
