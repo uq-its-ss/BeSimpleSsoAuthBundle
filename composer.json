@@ -15,12 +15,30 @@
             "homepage": "https://github.com/BeSimple/BeSimpleSsoAuthBundle/contributors"
         }
     ],
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "onelogin/php-saml",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/onelogin/php-saml",
+                    "type": "git",
+                    "reference": "origin/master"
+                },
+                "autoload": {
+                    "psr-0": { "OneLogin_Saml_": "src/OneLogin/Saml/" }
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "kriswallsmith/buzz": ">=0.7,<1.0-dev",
         "symfony/framework-bundle": "~2.1",
         "symfony/twig-bundle": "~2.1",
-        "symfony/security-bundle": "~2.1"
+        "symfony/security-bundle": "~2.1",
+        "onelogin/php-saml": "dev-master"
     },
     "require-dev": {
         "symfony/browser-kit": "~2.1",
