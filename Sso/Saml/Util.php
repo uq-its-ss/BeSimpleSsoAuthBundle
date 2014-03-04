@@ -37,7 +37,7 @@ class Util
             $certificate = substr($certificate, strlen(self::PEM_START));
         }
 
-        if (self:stringEndsWith($certificate, self::PEM_CLOSE)) {
+        if (self::stringEndsWith($certificate, self::PEM_CLOSE)) {
             $certLength = strlen($certificate);
             $certificate = substr($certificate, 0, $certLength - strlen(self::PEM_CLOSE));
         }
