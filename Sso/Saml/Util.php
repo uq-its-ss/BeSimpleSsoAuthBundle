@@ -12,7 +12,9 @@ class Util
     {
         $settings = new SamlSettings();
         $settings->idpSingleSignOnUrl = $component->getConfigValue('idp_sso_url');
-        $settings->idpPublicCertificate = $component->getConfigValue('idp_certificate');
+        $certificate = $component->getConfigValue('idp_certificate');
+        $certificate = preg_replace('/\s+/', "\n", $certificate);
+        $settings->idpPublicCertificate = $certificate;
         $settings->spIssuer = $component->getConfigValue('sp_issuer');
         $settings->spReturnUrl = $component->getConfigValue('sp_callback_url');
 
