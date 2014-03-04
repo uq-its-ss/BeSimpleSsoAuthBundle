@@ -32,7 +32,7 @@ class Validation extends AbstractValidation implements ValidationInterface
         }
 
         if ($success) {
-            $this->username = $samlResponse->getNamedId();
+            $this->username = $samlResponse->getNameId();
             $this->attributes = $samlResponse->getAttributes();
         }
 
