@@ -26,5 +26,6 @@ class BeSimpleSsoAuthExtension extends Extension
         $loader->load('security_listeners.xml');
         $loader->load('factory.xml');
         $loader->load('cas.xml');
+        $loader->load('saml.xml');
     }
 }
