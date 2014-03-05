@@ -23,7 +23,12 @@ class Util
         $settings->idpPublicCertificate = $certificate;
 
         if ($nameIdFormat = $component->getConfigValue('name_id_format')) {
-            $settings->requestedNameIdFormat = constant('OneLogin_Saml_Settings::'.$nameIdFormat);
+            $constantName = 'OneLogin_Saml_Settings::'.$nameIdFormat;
+            if (defined($constantName)) {
+                $settings->requestedNameIdFormat = constant($constantName);
+            } else {
+                $settings->requestedNameIdFormat = $nameIdFormat;
+            }
         }
 
         return $settings;
