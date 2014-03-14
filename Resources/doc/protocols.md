@@ -5,7 +5,7 @@ SSO protocols
 **Currently implemented:**
 
 -   CAS: http://www.jasig.org/cas
-
+    SAML 2.0: https://en.wikipedia.org/wiki/SAML_2.0
 
 **Planed implementations:**
 
