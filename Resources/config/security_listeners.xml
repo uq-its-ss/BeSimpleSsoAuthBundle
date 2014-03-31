@@ -13,6 +13,7 @@
         <parameter key="security.authentication.sso_authentication_failure_handler.class">BeSimple\SsoAuthBundle\Security\Http\Authentication\SsoAuthenticationFailureHandler</parameter>
         <parameter key="security.authentication.hide_user_not_found">FALSE</parameter>
         <parameter key="security.authentication.saml_sso_entry_point.class">BeSimple\SsoAuthBundle\Security\Http\EntryPoint\SamlSsoAuthenticationEntryPoint</parameter>
+        <parameter key="security.authentication.listener.saml_sso.class">BeSimple\SsoAuthBundle\Security\Http\Firewall\SamlSsoAuthenticationListener</parameter>
     </parameters>
 
     <services>
@@ -47,6 +48,13 @@
             <tag name="monolog.logger" channel="security" />
             <call method="setFactory">
                 <argument type="service" id="be_simple.sso_auth.factory" />
+            </call>
+        </service>
+
+        <service id="security.authentication.listener.saml_sso" class="%security.authentication.listener.saml_sso.class%" abstract="true" public="false" parent="security.authentication.listener.abstract">
+            <tag name="monolog.logger" channel="security" />
+            <call method="setFactory">
+                <argument type="service" id="be_simple.sso_auth.saml_factory" />
             </call>
         </service>
 
