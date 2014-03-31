@@ -20,6 +20,8 @@ class Factory
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+        $this->protocols = array();
+        $this->managers = array();
     }
 
     public function addProtocol($id, $service)
