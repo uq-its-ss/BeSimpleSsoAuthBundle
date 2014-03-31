@@ -2,7 +2,7 @@
 
 namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
-use BeSimple\SsoAuthBundle\Security\Core\Authentication\Token\SsoToken;
+use BeSimple\SsoAuthBundle\Security\Core\Authentication\Token\SamlToken;
 use BeSimple\SsoAuthBundle\Sso\ProtocolInterface;
 use OneLogin_Saml_AuthRequest as SamlAuthRequest;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,11 +33,11 @@ class Manager
      *
      * @param Request $request
      *
-     * @return \BeSimple\SsoAuthBundle\Security\Core\Authentication\Token\SsoToken
+     * @return SamlToken
      */
     public function createToken(Request $request)
     {
-        return new SsoToken($this, $this->protocol->extractCredentials($request));
+        return new SamlToken($this, $this->protocol->extractCredentials($request));
     }
 
 }
