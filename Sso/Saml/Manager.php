@@ -11,22 +11,23 @@ use Buzz\Message\Response as BuzzResponse;
 class Manager
 {
 
-    private $protocol;
+    /** @var \OneLogin_Saml_Settings */
+    private $settings;
 
-    public function __construct(ProtocolInterface $protocol)
+    public function __construct(Config $config)
     {
-        $this->protocol = $protocol;
+        $this->settings = Util::createOneLoginSamlSettings($config);
     }
 
     public function getLoginUrl()
     {
-        $authRequest = new SamlAuthRequest($this->createSamlSettings());
+        $authRequest = new SamlAuthRequest($this->settings);
         return $authRequest->getRedirectUrl();
     }
 
     public function isValidationRequest(Request $request)
     {
-        return $this->protocol->isValidationRequest($request);
+        return $request->request->has('SAMLResponse');
     }
 
     /**
@@ -38,19 +39,14 @@ class Manager
      */
     public function createToken(Request $request)
     {
-        return new SamlToken($this, $this->protocol->extractCredentials($request));
+        return new SamlToken($this, $request->request->get('SAMLResponse'));
     }
 
     public function validateToken(SamlToken $token)
     {
         $validation = new Validation(new BuzzResponse(), $token->getSamlResponse());
-        $validation->setSamlSettings($this->createSamlSettings());
+        $validation->setSamlSettings($this->settings);
         return $validation;
-    }
-
-    private function createSamlSettings()
-    {
-        return Util::createOneLoginSamlSettings($this->protocol);
     }
 
 }

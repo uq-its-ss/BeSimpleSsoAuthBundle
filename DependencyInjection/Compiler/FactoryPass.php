@@ -40,8 +40,8 @@ class FactoryPass implements CompilerPassInterface
     {
         $factoryBuilder = $container->getDefinition('be_simple.sso_auth.saml_factory');
 
-        foreach ($container->findTaggedServiceIds('be_simple.sso_auth.protocol.saml') as $id => $attributes) {
-            $factoryBuilder->addMethodCall('addProtocol', array($attributes[0]['id'], $id));
+        foreach ($container->findTaggedServiceIds('be_simple.sso_auth.saml_config') as $id => $attributes) {
+            $factoryBuilder->addMethodCall('addConfig', array($attributes[0]['id'], $id));
         }
     }
 

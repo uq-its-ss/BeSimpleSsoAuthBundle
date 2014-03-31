@@ -4,6 +4,7 @@ namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
 use BeSimple\SsoAuthBundle\Exception\ConfigNotFoundException;
 use BeSimple\SsoAuthBundle\Exception\ProtocolNotFoundException;
+use BeSimple\SsoAuthBundle\Exception\SamlSettingsNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -14,7 +15,7 @@ class Factory
     private $container;
 
     /** @var array */
-    private $protocols;
+    private $configs;
 
     /** @var array */
     private $managers;
@@ -22,13 +23,13 @@ class Factory
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->protocols = array();
+        $this->configs = array();
         $this->managers = array();
     }
 
-    public function addProtocol($id, $service)
+    public function addConfig($id, $service)
     {
-        $this->protocols[$id] = $service;
+        $this->configs[$id] = $service;
     }
 
     public function getManager($id, $checkUrl)
@@ -46,7 +47,7 @@ class Factory
      *
      * @return Manager
      *
-     * @throws \BeSimple\SsoAuthBundle\Exception\ConfigNotFoundException
+     * @throws ConfigNotFoundException
      */
     private function createManager($id, $checkUrl)
     {
@@ -59,25 +60,25 @@ class Factory
         $config = $this->container->getParameter($parameter);
         $config['server']['check_url'] = $checkUrl;
 
-        return new Manager($this->getProtocol($config['protocol']));
+        return new Manager($this->getConfig($config['config']));
     }
 
     /**
      * @param array $config
      *
-     * @return ProtocolInterface
+     * @return Settings
      *
-     * @throws \BeSimple\SsoAuthBundle\Exception\ProtocolNotFoundException
+     * @throws ConfigNotFoundException
      */
-    private function getProtocol(array $config)
+    private function getConfig(array $config)
     {
         $id = $config['id'];
 
-        if (!array_key_exists($id, $this->protocols)) {
-            throw new ProtocolNotFoundException($id);
+        if (!array_key_exists($id, $this->configs)) {
+            throw new ConfigNotFoundException($id);
         }
 
-        return $this->container->get($this->protocols[$id])->setConfig($config);
+        return $this->container->get($this->configs[$id])->setConfig($config);
     }
 
 }

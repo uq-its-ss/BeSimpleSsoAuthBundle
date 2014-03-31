@@ -51,7 +51,7 @@ configs:
 
     be_simple_sso_auth:
         saml_sso:
-            protocol:
+            config:
                 id: saml
                 idp_sso_url:     %idp_sso_url%
                 idp_certificate: %idp_certificate%

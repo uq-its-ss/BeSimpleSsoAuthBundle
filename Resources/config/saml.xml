@@ -5,12 +5,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="be_simple.sso_auth.protocol.saml.class">BeSimple\SsoAuthBundle\Sso\Saml\Protocol</parameter>
+        <parameter key="be_simple.sso_auth.saml_config.class">BeSimple\SsoAuthBundle\Sso\Saml\Config</parameter>
     </parameters>
 
     <services>
-        <service id="be_simple.sso_auth.protocol.saml" class="%be_simple.sso_auth.protocol.saml.class%">
-            <tag name="be_simple.sso_auth.protocol.saml" id="saml"/>
+        <service id="be_simple.sso_auth.saml_config" class="%be_simple.sso_auth.saml_config.class%">
+            <tag name="be_simple.sso_auth.saml_config" id="saml"/>
         </service>
     </services>
 </container>
