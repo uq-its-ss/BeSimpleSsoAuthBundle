@@ -2,6 +2,8 @@
 
 namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
+use BeSimple\SsoAuthBundle\Exception\ConfigNotFoundException;
+use BeSimple\SsoAuthBundle\Exception\ProtocolNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -58,6 +60,24 @@ class Factory
         $config['server']['check_url'] = $checkUrl;
 
         return new Manager($this->getProtocol($config['protocol']));
+    }
+
+    /**
+     * @param array $config
+     *
+     * @return ProtocolInterface
+     *
+     * @throws \BeSimple\SsoAuthBundle\Exception\ProtocolNotFoundException
+     */
+    private function getProtocol(array $config)
+    {
+        $id = $config['id'];
+
+        if (!array_key_exists($id, $this->protocols)) {
+            throw new ProtocolNotFoundException($id);
+        }
+
+        return $this->container->get($this->protocols[$id])->setConfig($config);
     }
 
 }
