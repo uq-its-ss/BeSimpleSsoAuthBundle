@@ -43,7 +43,7 @@ class Manager
 
     public function validateToken(SamlToken $token)
     {
-        $validation new Validation(new BuzzResponse(), $token->getSamlResponse());
+        $validation = new Validation(new BuzzResponse(), $token->getSamlResponse());
         $validation->setSamlSettings($this->createSamlSettings());
         return $validation;
     }
