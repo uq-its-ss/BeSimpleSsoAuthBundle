@@ -2,6 +2,7 @@
 
 namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
+use BeSimple\SsoAuthBundle\Security\Core\Authentication\Token\SsoToken;
 use BeSimple\SsoAuthBundle\Sso\ProtocolInterface;
 use OneLogin_Saml_AuthRequest as SamlAuthRequest;
 use Symfony\Component\HttpFoundation\Request;
