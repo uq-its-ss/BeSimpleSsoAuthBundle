@@ -60,4 +60,9 @@ class SamlToken extends AbstractToken
         return $this->manager;
     }
 
+    public function getCredentials()
+    {
+        return $this->samlResponse;
+    }
+
 }
