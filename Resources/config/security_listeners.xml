@@ -12,6 +12,7 @@
         <parameter key="security.logout.sso_success_handler.class">BeSimple\SsoAuthBundle\Security\Http\Logout\SsoLogoutSuccessHandler</parameter>
         <parameter key="security.authentication.sso_authentication_failure_handler.class">BeSimple\SsoAuthBundle\Security\Http\Authentication\SsoAuthenticationFailureHandler</parameter>
         <parameter key="security.authentication.hide_user_not_found">FALSE</parameter>
+        <parameter key="security.authentication.saml_sso_entry_point.class">BeSimple\SsoAuthBundle\Security\Http\EntryPoint\SamlSsoAuthenticationEntryPoint</parameter>
     </parameters>
 
     <services>
@@ -19,6 +20,11 @@
             <argument type="service" id="http_kernel" />
             <argument type="service" id="be_simple.sso_auth.factory" />
             <!-- $ssoProviderFactoryConfig -->
+        </service>
+
+        <service id="security.authentication.saml_sso_entry_point" class="%security.authentication.saml_sso_entry_point.class%" abstract="true" public="false">
+            <argument type="service" id="be_simple.sso_auth.saml_factory" />
+            <!-- $samlProviderFactoryConfig -->
         </service>
 
         <service id="security.authentication.provider.sso" class="%security.authentication.provider.sso.class%" abstract="true" public="false">

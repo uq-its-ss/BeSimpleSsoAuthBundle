@@ -22,6 +22,7 @@ class BeSimpleSsoAuthBundle extends Bundle
 
         $ext = $container->getExtension('security');
         $ext->addSecurityListenerFactory(new TrustedSsoFactory());
+        $ext->addSecurityListenerFactory(new SamlSsoFactory());
 
         $container->addCompilerPass(new FactoryPass());
     }

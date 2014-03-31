@@ -6,16 +6,11 @@
 
     <parameters>
         <parameter key="be_simple.sso_auth.protocol.saml.class">BeSimple\SsoAuthBundle\Sso\Saml\Protocol</parameter>
-        <parameter key="be_simple.sso_auth.server.saml.class">BeSimple\SsoAuthBundle\Sso\Saml\Server</parameter>
     </parameters>
 
     <services>
         <service id="be_simple.sso_auth.protocol.saml" class="%be_simple.sso_auth.protocol.saml.class%">
-            <tag name="be_simple.sso_auth.protocol" id="saml"/>
-        </service>
-
-        <service id="be_simple.sso_auth.server.saml" class="%be_simple.sso_auth.server.saml.class%">
-            <tag name="be_simple.sso_auth.server" id="saml"/>
+            <tag name="be_simple.sso_auth.protocol.saml" id="saml"/>
         </service>
     </services>
 </container>

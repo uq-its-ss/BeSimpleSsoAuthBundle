@@ -15,10 +15,16 @@ class FactoryPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('be_simple.sso_auth.factory')) {
-            return;
+        if ($container->has('be_simple.sso_auth.factory')) {
+            $this->processDefaultFactory();
         }
+        if ($container->has('be_simple.sso_auth.saml_factory')) {
+            $this->processSamlFactory();
+        }
+    }
 
+    private function processDefaultFactory()
+    {
         $factoryBuilder = $container->getDefinition('be_simple.sso_auth.factory');
 
         foreach ($container->findTaggedServiceIds('be_simple.sso_auth.protocol') as $id => $attributes) {
@@ -29,4 +35,14 @@ class FactoryPass implements CompilerPassInterface
             $factoryBuilder->addMethodCall('addServer', array($attributes[0]['id'], $id));
         }
     }
+
+    private function processSamlFactory()
+    {
+        $factoryBuilder = $container->getDefinition('be_simple.sso_auth.saml_factory');
+
+        foreach ($container->findTaggedServiceIds('be_simple.sso_auth.protocol.saml') as $id => $attributes) {
+            $factoryBuilder->addMethodCall('addProtocol', array($attributes[0]['id'], $id));
+        }
+    }
+
 }
