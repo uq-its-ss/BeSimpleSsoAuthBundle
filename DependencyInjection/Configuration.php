@@ -40,6 +40,7 @@ class Configuration implements ConfigurationInterface
 
         $this->setComponentDefinition($serverDefinition, 'protocol');
         $this->setComponentDefinition($serverDefinition, 'server');
+        $this->setComponentDefinition($serverDefinition, 'config');
 
         return $treeBuilder;
     }
