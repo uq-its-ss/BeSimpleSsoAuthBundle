@@ -1,23 +1,17 @@
 SAML Authentication with Symfony2
 =================================
 
-This feature should be considered experimental. To make this work in your
-app, be prepared to implement some hacks. Feedback and pull requests are
+This feature should be considered beta quality. Feedback and pull requests are
 welcome.
 
-Here (some of) the caveats and hacks:
+Here are potential caveats to be aware of:
 
 * Uses `onelogin/php-saml` to handle the SAML protocol
-* `onelogin/php-saml` integration has been 'smashed' into this bundle. The
-  bundle as it stands, is very CAS centric.
 * Logout is not supported. If you want to logout from your app, you need to
   create your own controller action for this. More details below.
-* You must set `create_users` to be `true`, to support the next hack.
-* Your implementation of `UserProviderInterface` must also implement
-  `UserFactoryInterface`. This will allow you to retrieve the attributes
-  payload from a SAML authentication response. More details below.
-
-Still feeling brave? :)
+* Your implementation of `UserProviderInterface` must be changed to implement
+  `SamlUserProviderInterface`. This will allow you to map SAML response
+  attributes back into a username. More details below.
 
 
 Configure Composer dependency and install the bundles
@@ -64,13 +58,6 @@ configs:
                 sp_issuer:       %sp_issuer%
                 sp_callback_url: %sp_callback_url%
                 name_id_format:  %name_id_format%
-            server:
-                id: saml
-                idp_sso_url:     %idp_sso_url%
-                idp_certificate: %idp_certificate%
-                sp_issuer:       %sp_issuer%
-                sp_callback_url: %sp_callback_url%
-                name_id_format:  %name_id_format%
 
 * `idp_sso_url`: This is the URL to your SAML IdP
 * `idp_certificate`: The contents of your SAML IdP's X.509 public certificate
@@ -92,13 +79,12 @@ Create a firewall
         firewalls:
             my_firewall:
                 pattern: ^/
-                trusted_sso:
+                saml_sso:
                     manager: saml_sso
                     login_path: /login
                     check_path: /login_check
                     login_action: false
                     logout_action: false
-                    create_users: true
                     provider: my_user_provider
 
 
@@ -127,41 +113,21 @@ included.
 
     <?php
 
-    use BeSimple\SsoAuthBundle\Security\Core\User\UserFactoryInterface;
-    use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-    use Symfony\Component\Security\Core\User\UserInterface;
-    use Symfony\Component\Security\Core\User\UserProviderInterface;
+    use BeSimple\SsoAuthBundle\Security\Core\User\SamlUserProviderInterface;
 
-    class MyUserProvider implements UserProviderInterface, UserFactoryInterface
+    class MyUserProvider implements SamlUserProviderInterface
     {
-        public function loadUserByUsername($username)
+
+        public function extractUsername($nameId, array $samlAttributes)
         {
-            // $username is not a username, it is a SAML identifier.
-            // This is a workaround to Symfony's username centric workflow.
-            // This will trigger the `createUser` call in SsoAuthBundle when
-            // createUsers is configured to `true`.
-            throw new UsernameNotFoundException();
+            // Look into the $samlAtributes array for a username or
+            // your identifier of choice. Return this value. The returned
+            // value is used to feed into loadUserByUsername.
+            $username = 'blah';
+            return $username;
         }
 
-        public function createUser($username, array $roles, array $attributes)
-        {
-            // Again, $username is a SAML identifier. Replace with information
-            // from attributes hash. The information in this hash is dependendent
-            // on what your IdP provides.
-
-            // You will need to return a user object that implements
-            // UserInterface.
-
-            $user = ...
-
-            return $user;
-        }
-
-        public function refreshUser(UserInterface $user)
-        {
-            // Load user roles, etc.
-            return $user;
-        }
+        /* Implement the rest of the UserProviderInterface methods */
 
     }
 
@@ -198,5 +164,3 @@ Here is a sample controller for implementing logout.
         }
 
     }
-
-

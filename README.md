@@ -17,7 +17,7 @@ Only CAS protocol is implemented for now, many other are planned.
 -   [Read documentation](https://github.com/BeSimple/BeSimpleSsoAuthBundle/blob/master/Resources/doc/index.md)
 -   [See the license](https://github.com/BeSimple/BeSimpleSsoAuthBundle/blob/master/Resources/meta/LICENSE)
 
-Experimental support for SAML protocol is implemented.
+Support for SAML protocol is implemented.
 
 - [SAML documentation](https://github.com/uq-its-ss/BeSimpleSsoAuthBundle/blob/saml/Resources/doc/saml.md)
 
