@@ -6,6 +6,7 @@ use BeSimple\SsoAuthBundle\Security\Core\Authentication\Token\SamlToken;
 use BeSimple\SsoAuthBundle\Sso\ProtocolInterface;
 use OneLogin_Saml_AuthRequest as SamlAuthRequest;
 use Symfony\Component\HttpFoundation\Request;
+use Buzz\Message\Response as BuzzResponse;
 
 class Manager
 {
@@ -19,7 +20,7 @@ class Manager
 
     public function getLoginUrl()
     {
-        $authRequest = new SamlAuthRequest(Util::createOneLoginSamlSettings($this->protocol));
+        $authRequest = new SamlAuthRequest($this->createSamlSettings());
         return $authRequest->getRedirectUrl();
     }
 
@@ -38,6 +39,18 @@ class Manager
     public function createToken(Request $request)
     {
         return new SamlToken($this, $this->protocol->extractCredentials($request));
+    }
+
+    public function validateToken(SamlToken $token)
+    {
+        $validation new Validation(new BuzzResponse(), $token->getSamlResponse());
+        $validation->setSamlSettings($this->createSamlSettings());
+        return $validation;
+    }
+
+    private function createSamlSettings()
+    {
+        return Util::createOneLoginSamlSettings($this->protocol);
     }
 
 }

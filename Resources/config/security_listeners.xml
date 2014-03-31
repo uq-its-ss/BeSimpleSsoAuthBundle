@@ -14,6 +14,7 @@
         <parameter key="security.authentication.hide_user_not_found">FALSE</parameter>
         <parameter key="security.authentication.saml_sso_entry_point.class">BeSimple\SsoAuthBundle\Security\Http\EntryPoint\SamlSsoAuthenticationEntryPoint</parameter>
         <parameter key="security.authentication.listener.saml_sso.class">BeSimple\SsoAuthBundle\Security\Http\Firewall\SamlSsoAuthenticationListener</parameter>
+        <parameter key="security.authentication.provider.saml_sso.class">BeSimple\SsoAuthBundle\Security\Core\Authentication\Provider\SamlAuthenticationProvider</parameter>
     </parameters>
 
     <services>
@@ -30,6 +31,14 @@
 
         <service id="security.authentication.provider.sso" class="%security.authentication.provider.sso.class%" abstract="true" public="false">
             <argument /><!-- $userProvider -->
+            <argument type="service" id="security.user_checker" />
+            <argument/><!-- $createUsers -->
+            <argument/><!-- $createdUsersRoles -->
+            <argument>%security.authentication.hide_user_not_found%</argument>
+        </service>
+
+        <service id="security.authentication.provider.saml_sso" class="%security.authentication.provider.saml_sso.class%" abstract="true" public="false">
+            <argument /><!-- $samlUserProvider -->
             <argument type="service" id="security.user_checker" />
             <argument/><!-- $createUsers -->
             <argument/><!-- $createdUsersRoles -->

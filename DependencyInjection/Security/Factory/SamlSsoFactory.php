@@ -24,6 +24,20 @@ class SamlSsoFactory extends AbstractSsoFactory
         return 'security.authentication.listener.saml_sso';
     }
 
+    protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)
+    {
+        $provider = 'security.authentication.provider.saml_sso.'.$id;
+
+        $container
+            ->setDefinition($provider, new DefinitionDecorator('security.authentication.provider.saml_sso'))
+            ->replaceArgument(0, new Reference($userProviderId))
+            ->replaceArgument(2, $config['create_users'])
+            ->replaceArgument(3, $config['created_users_roles'])
+        ;
+
+        return $provider;
+    }
+
     protected function createEntryPoint($container, $id, $config, $defaultEntryPoint)
     {
         $entryPointId = 'security.authentication.saml_sso_entry_point.'.$id;
