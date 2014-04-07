@@ -69,7 +69,7 @@ class SamlAuthenticationProvider extends SsoAuthenticationProvider
             if ('saml:validation' === $name) {
                 continue;
             }
-            $authenticatedToken->setAtribute($name, $value);
+            $authenticatedToken->setAttribute($name, $value);
         }
 
         return $authenticatedToken;
