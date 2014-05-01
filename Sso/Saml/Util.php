@@ -27,7 +27,7 @@ class Util
                 'singleSignOnService' => array(
                     'url' => $component->getConfigValue('idp_sso_url'),
                     'binding' => Saml2Constants::BINDING_HTTP_REDIRECT,
-                )
+                ),
                 'x509cert' => '',
             ),
         );

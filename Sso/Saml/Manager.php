@@ -28,7 +28,7 @@ class Manager
         $idpData = $this->settings->getIdPData();
         $ssoUrl = $idpData['singleSignOnService']['url'];
 
-        return OneLogin_Saml2_Utils::redirect($ssoUrl, $parameters, true);
+        return \OneLogin_Saml2_Utils::redirect($ssoUrl, $parameters, true);
     }
 
     public function isValidationRequest(Request $request)
