@@ -4,14 +4,14 @@ namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
 use BeSimple\SsoAuthBundle\Security\Core\Authentication\Token\SamlToken;
 use BeSimple\SsoAuthBundle\Sso\ProtocolInterface;
-use OneLogin_Saml_AuthRequest as SamlAuthRequest;
+use OneLogin_Saml2_AuthnRequest as Saml2AuthnRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Buzz\Message\Response as BuzzResponse;
 
 class Manager
 {
 
-    /** @var \OneLogin_Saml_Settings */
+    /** @var \OneLogin_Saml2_Settings */
     private $settings;
 
     public function __construct(Config $config)
@@ -21,8 +21,14 @@ class Manager
 
     public function getLoginUrl()
     {
-        $authRequest = new SamlAuthRequest($this->settings);
-        return $authRequest->getRedirectUrl();
+        $authnRequest = new Saml2AuthnRequest($this->settings);
+        $samlRequest = $authnRequest->getRequest();
+        $parameters = array('SAMLRequest' => $samlRequest);
+
+        $idpData = $this->settings->getIdPData();
+        $ssoUrl = $idpData['singleSignOnService']['url'];
+
+        return OneLogin_Saml2_Utils::redirect($ssoUrl, $parameters, true);
     }
 
     public function isValidationRequest(Request $request)

@@ -5,23 +5,23 @@ namespace BeSimple\SsoAuthBundle\Sso\Saml;
 use BeSimple\SsoAuthBundle\Sso\AbstractValidation;
 use BeSimple\SsoAuthBundle\Sso\ValidationInterface;
 use Buzz\Message\Response;
-use OneLogin_Saml_Response as SamlResponse;
-use OneLogin_Saml_Settings as SamlSettings;
+use OneLogin_Saml2_Response as Saml2Response;
+use OneLogin_Saml2_Settings as Saml2Settings;
 
 class Validation extends AbstractValidation implements ValidationInterface
 {
 
     private $samlSettings;
 
-    public function setSamlSettings(SamlSettings $settings)
+    public function setSamlSettings(Saml2Settings $settings)
     {
         $this->samlSettings = $settings;
     }
 
-    protected function validateResponse(Response $response)
+    protected function validateResponse(Response $unusedResponse)
     {
         $assertion = $this->getCredentials();
-        $samlResponse = new SamlResponse($this->samlSettings, $assertion);
+        $samlResponse = new Saml2Response($this->samlSettings, $assertion);
 
         $success = false;
 
