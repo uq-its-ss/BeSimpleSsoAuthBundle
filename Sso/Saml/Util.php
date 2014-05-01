@@ -24,6 +24,7 @@ class Util
                 'nameIdFormat' => Saml2Constants::NAMEID_EMAIL_ADDRESS,
             ),
             'idp' => array(
+                'entityId' => $component->getConfigValue('idp_entity_id'),
                 'singleSignOnService' => array(
                     'url' => $component->getConfigValue('idp_sso_url'),
                     'binding' => Saml2Constants::BINDING_HTTP_REDIRECT,
