@@ -15,19 +15,13 @@
             "homepage": "https://github.com/BeSimple/BeSimpleSsoAuthBundle/contributors"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/uq-its-ss/php-saml"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "kriswallsmith/buzz": ">=0.7,<1.0-dev",
         "symfony/framework-bundle": "~2.1",
         "symfony/twig-bundle": "~2.1",
         "symfony/security-bundle": "~2.1",
-        "onelogin/php-saml": "dev-composer"
+        "onelogin/php-saml": "dev-master"
     },
     "require-dev": {
         "symfony/browser-kit": "~2.1",

@@ -3,70 +3,49 @@
 namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
 use BeSimple\SsoAuthBundle\Sso\AbstractComponent as Component;
-use OneLogin_Saml_Settings as SamlSettings;
+use OneLogin_Saml2_Settings as Saml2Settings;
+use OneLogin_Saml2_Constants as Saml2Constants;
+use OneLogin_Saml2_Utils as Saml2Utils;
 
 class Util
 {
 
-    const PEM_START = '-----BEGIN CERTIFICATE-----';
-    const PEM_CLOSE = '-----END CERTIFICATE-----';
-
     public static function createOneLoginSamlSettings(Component $component)
     {
-        $settings = new SamlSettings();
-        $settings->idpSingleSignOnUrl = $component->getConfigValue('idp_sso_url');
-        $settings->spIssuer = $component->getConfigValue('sp_issuer');
-        $settings->spReturnUrl = $component->getConfigValue('sp_callback_url');
+        $settings = array(
+            'strict' => true,
+            'debug' => false,
+            'sp' => array(
+                'entityId' => $component->getConfigValue('sp_issuer'),
+                'assertionConsumerService' => array(
+                    'url' => $component->getConfigValue('sp_callback_url'),
+                    'binding' => Saml2Constants::BINDING_HTTP_POST,
+                ),
+                'nameIdFormat' => Saml2Constants::NAMEID_EMAIL_ADDRESS,
+            ),
+            'idp' => array(
+                'singleSignOnService' => array(
+                    'url' => $component->getConfigValue('idp_sso_url'),
+                    'binding' => Saml2Constants::BINDING_HTTP_REDIRECT,
+                )
+                'x509cert' => '',
+            ),
+        );
 
         $certificate = $component->getConfigValue('idp_certificate');
-        $certificate = self::cleanupX509Certificate($certificate);
-        $settings->idpPublicCertificate = $certificate;
+        $certificate = Saml2Utils::formatCert($certificate, true);
+        $settings['idp']['x509cert'] = $certificate;
 
         if ($nameIdFormat = $component->getConfigValue('name_id_format')) {
-            $constantName = 'OneLogin_Saml_Settings::'.$nameIdFormat;
+            $constantName = 'OneLogin_Saml2_Constants::'.$nameIdFormat;
             if (defined($constantName)) {
-                $settings->requestedNameIdFormat = constant($constantName);
+                $settings['sp']['nameIdFormat'] = constant($constantName);
             } else {
-                $settings->requestedNameIdFormat = $nameIdFormat;
+                $settings['sp']['nameIdFormat'] = $nameIdFormat;
             }
         }
 
-        return $settings;
-    }
-
-    private static function cleanupX509Certificate($str)
-    {
-        $certificate = trim($str);
-
-        if (self::stringStartsWith($certificate, self::PEM_START)) {
-            $certificate = substr($certificate, strlen(self::PEM_START));
-        }
-
-        if (self::stringEndsWith($certificate, self::PEM_CLOSE)) {
-            $certLength = strlen($certificate);
-            $certificate = substr($certificate, 0, $certLength - strlen(self::PEM_CLOSE));
-        }
-
-        $certificate = preg_replace('/\s+/', "\n", $certificate);
-        $certificate = trim($certificate);
-
-        return self::PEM_START."\n".$certificate."\n".self::PEM_CLOSE;
-    }
-
-    private static function stringStartsWith($str, $search)
-    {
-        if ('' === $search) {
-            return true;
-        }
-        return 0 === strpos($str, $search);
-    }
-
-    private static function stringEndsWith($str, $search)
-    {
-        if ('' === $search) {
-            return true;
-        }
-        return substr($str, -strlen($search)) === $search;
+        return new Saml2Settings($settings);
     }
 
 }
