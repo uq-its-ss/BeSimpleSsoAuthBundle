@@ -50,7 +50,7 @@ class SamlAuthenticationProvider extends SsoAuthenticationProvider
         $manager = $token->getManager();
         $validation = $manager->validateToken($token);
         if (!$validation->isSuccess()) {
-            throw new BadCredentialsException('Invalid SAML response');
+            throw new BadCredentialsException('SAML validation error: '.$validation->getError());
         }
 
         $extractedUsername = $this->userProvider->extractUsername($validation->getUsername(), $validation->getAttributes());
