@@ -42,6 +42,21 @@ Add the following dependencies:
     }
 
 
+Register the bundle
+-------------------
+
+In `app/AppKernel.php`, register the bundle.
+
+    public function registerBundles()
+    {
+        $bundles = array(
+            ...
+            new BeSimple\SsoAuthBundle\BeSimpleSsoAuthBundle(),
+            ...
+        );
+        return $bundles;
+    }
+
 
 Configure SAML
 --------------
