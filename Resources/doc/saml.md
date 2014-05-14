@@ -24,10 +24,6 @@ Add the following repositories:
             {
                 "type": "vcs",
                 "url": "git://github.com/uq-its-ss/BeSimpleSsoAuthBundle.git"
-            },
-            {
-                "type": "vcs",
-                "url": "git://github.com/uq-its-ss/php-saml.git"
             }
         ]
     }
@@ -36,8 +32,8 @@ Add the following dependencies:
 
     {
         "require": {
-            "onelogin/php-saml": "dev-composer",
-            "besimple/sso-auth-bundle": "dev-saml"
+            "onelogin/php-saml": "dev-master",
+            "besimple/sso-auth-bundle": "dev-saml2"
         }
     }
 
@@ -54,17 +50,19 @@ configs:
             config:
                 id: saml
                 idp_sso_url:     %idp_sso_url%
+                idp_entity_id:   %idp_entity_id%
                 idp_certificate: %idp_certificate%
                 sp_issuer:       %sp_issuer%
                 sp_callback_url: %sp_callback_url%
                 name_id_format:  %name_id_format%
 
 * `idp_sso_url`: This is the URL to your SAML IdP
+* `idp_entity_id`: The SAML IdP metadata entity ID
 * `idp_certificate`: The contents of your SAML IdP's X.509 public certificate
 * `sp_issuer`: I usually use the application's base URL, eg. `https://example.org/`
 * `sp_callback_url`: The `check_path` value tacked onto the application's base URL,
   eg. `https://example.org/login_check`
-* `name_id_format`: The name of a constant in [`OneLogin_Saml_Settings`][1] or
+* `name_id_format`: The name of a `NAMEID_` constant in [`OneLogin_Saml2_Settings`][1] or
   a value like `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`
 
 I recommend putting these values in `parameters.yml`.
