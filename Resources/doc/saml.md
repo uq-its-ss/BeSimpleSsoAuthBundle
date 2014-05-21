@@ -67,7 +67,7 @@ configs:
 
 I recommend putting these values in `parameters.yml`.
 
-[1]: https://github.com/onelogin/php-saml/blob/master/src/OneLogin/Saml/Settings.php
+[1]: https://github.com/onelogin/php-saml/blob/master/lib/Saml2/Constants.php
 
 
 Create a firewall
