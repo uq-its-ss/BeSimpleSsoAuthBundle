@@ -32,7 +32,6 @@ Add the following dependencies:
 
     {
         "require": {
-            "onelogin/php-saml": "dev-master",
             "besimple/sso-auth-bundle": "dev-saml2"
         }
     }
