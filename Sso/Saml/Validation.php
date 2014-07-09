@@ -23,7 +23,8 @@ class Validation extends AbstractValidation implements ValidationInterface
         $assertion = $this->getCredentials();
         $samlResponse = new Saml2Response($this->samlSettings, $assertion);
 
-        if ($samlResponse->isValid()) {
+        $success = $samlResponse->isValid();
+        if ($success) {
             $this->username = $samlResponse->getNameId();
             $this->attributes = $samlResponse->getAttributes();
         } else {
