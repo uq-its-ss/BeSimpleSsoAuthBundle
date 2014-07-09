@@ -19,5 +19,5 @@ Only CAS protocol is implemented for now, many other are planned.
 
 Support for SAML protocol is implemented.
 
-- [SAML documentation](https://github.com/uq-its-ss/BeSimpleSsoAuthBundle/blob/saml/Resources/doc/saml.md)
+- [SAML documentation](https://github.com/uq-its-ss/BeSimpleSsoAuthBundle/blob/saml2/Resources/doc/saml.md)
 
