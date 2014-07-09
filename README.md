@@ -19,5 +19,10 @@ Only CAS protocol is implemented for now, many other are planned.
 
 Support for SAML protocol is implemented.
 
+**Heads up!** This branch, `saml`, is no longer supported. Please use the `saml2`
+branch instead. The `saml2` branch uses the official `onelogin/php-saml`
+toolkit instead of a fork. The official toolkit also performs much more robust
+validation of SAML responses.
+
 - [SAML documentation](https://github.com/uq-its-ss/BeSimpleSsoAuthBundle/blob/saml/Resources/doc/saml.md)
 
