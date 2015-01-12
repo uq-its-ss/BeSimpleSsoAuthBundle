@@ -25,6 +25,7 @@
         </service>
 
         <service id="security.authentication.saml_sso_entry_point" class="%security.authentication.saml_sso_entry_point.class%" abstract="true" public="false">
+            <argument type="service" id="http_kernel" />
             <argument type="service" id="be_simple.sso_auth.saml_factory" />
             <!-- $samlProviderFactoryConfig -->
         </service>
