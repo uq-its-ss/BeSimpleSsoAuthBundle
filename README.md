@@ -1,4 +1,4 @@
-SSO authentication for Symfony2
+SSO authentication for Symfony3
 ===============================
 
 

@@ -21,7 +21,7 @@
         "symfony/framework-bundle": "~3.0",
         "symfony/twig-bundle": "~3.0",
         "symfony/security-bundle": "~3.0",
-        "onelogin/php-saml": "2.1.0"
+        "onelogin/php-saml": "~3.4"
     },
     "require-dev": {
         "symfony/browser-kit": "~3.0",
