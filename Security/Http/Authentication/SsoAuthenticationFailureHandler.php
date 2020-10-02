@@ -1,4 +1,7 @@
 <?php
+/**
+ * Forked and maintained by The University of Queensland
+ */
 
 namespace BeSimple\SsoAuthBundle\Security\Http\Authentication;
 

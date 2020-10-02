@@ -1,4 +1,7 @@
 <?php
+/**
+ * Forked and maintained by The University of Queensland
+ */
 
 namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
@@ -6,7 +9,6 @@ use BeSimple\SsoAuthBundle\Exception\ConfigNotFoundException;
 use BeSimple\SsoAuthBundle\Exception\ProtocolNotFoundException;
 use BeSimple\SsoAuthBundle\Exception\SamlSettingsNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 
 class Factory
 {

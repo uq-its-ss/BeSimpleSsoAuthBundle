@@ -1,17 +1,20 @@
 <?php
+/**
+ * Forked and maintained by The University of Queensland
+ */
 
 namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
 use BeSimple\SsoAuthBundle\Security\Core\Authentication\Token\SamlToken;
 use BeSimple\SsoAuthBundle\Sso\ProtocolInterface;
-use OneLogin_Saml2_AuthnRequest as Saml2AuthnRequest;
+use OneLogin\Saml2\AuthnRequest as Saml2AuthnRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Buzz\Message\Response as BuzzResponse;
 
 class Manager
 {
 
-    /** @var \OneLogin_Saml2_Settings */
+    /** @var \OneLogin\Saml2\Settings */
     private $settings;
 
     public function __construct(Config $config)
@@ -28,7 +31,7 @@ class Manager
         $idpData = $this->settings->getIdPData();
         $ssoUrl = $idpData['singleSignOnService']['url'];
 
-        return \OneLogin_Saml2_Utils::redirect($ssoUrl, $parameters, true);
+        return \OneLogin\Saml2\Utils::redirect($ssoUrl, $parameters, true);
     }
 
     public function isValidationRequest(Request $request)

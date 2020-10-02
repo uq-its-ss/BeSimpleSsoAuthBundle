@@ -1,12 +1,15 @@
 <?php
+/**
+ * Forked and maintained by The University of Queensland
+ */
 
 namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
 use BeSimple\SsoAuthBundle\Sso\AbstractValidation;
 use BeSimple\SsoAuthBundle\Sso\ValidationInterface;
 use Buzz\Message\Response;
-use OneLogin_Saml2_Response as Saml2Response;
-use OneLogin_Saml2_Settings as Saml2Settings;
+use OneLogin\Saml2\Response as Saml2Response;
+use OneLogin\Saml2\Settings as Saml2Settings;
 
 class Validation extends AbstractValidation implements ValidationInterface
 {

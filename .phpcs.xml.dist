@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ruleset name="Symfony">
+    <description>Compliance to Symfony Standards.</description>
+
+    <arg name="parallel" value="8"/>
+
+    <file>.</file>
+
+    <rule ref="Symfony">
+    	<exclude name="Generic.Files.LineLength"/>
+    	<exclude-pattern>/**/vendor</exclude-pattern>
+    </rule>
+
+</ruleset>

@@ -61,7 +61,7 @@ configs:
 * `sp_issuer`: I usually use the application's base URL, eg. `https://example.org/`
 * `sp_callback_url`: The `check_path` value tacked onto the application's base URL,
   eg. `https://example.org/login_check`
-* `name_id_format`: The name of a `NAMEID_` constant in [`OneLogin_Saml2_Settings`][1] or
+* `name_id_format`: The name of a `NAMEID_` constant in [`OneLogin\Saml2\Settings`][1] or
   a value like `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`
 
 I recommend putting these values in `parameters.yml`.

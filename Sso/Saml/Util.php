@@ -1,11 +1,14 @@
 <?php
+/**
+ * Forked and maintained by The University of Queensland
+ */
 
 namespace BeSimple\SsoAuthBundle\Sso\Saml;
 
 use BeSimple\SsoAuthBundle\Sso\AbstractComponent as Component;
-use OneLogin_Saml2_Settings as Saml2Settings;
-use OneLogin_Saml2_Constants as Saml2Constants;
-use OneLogin_Saml2_Utils as Saml2Utils;
+use OneLogin\Saml2\Settings as Saml2Settings;
+use OneLogin\Saml2\Constants as Saml2Constants;
+use OneLogin\Saml2\Utils as Saml2Utils;
 
 class Util
 {
@@ -38,7 +41,7 @@ class Util
         $settings['idp']['x509cert'] = $certificate;
 
         if ($nameIdFormat = $component->getConfigValue('name_id_format')) {
-            $constantName = 'OneLogin_Saml2_Constants::'.$nameIdFormat;
+            $constantName = 'OneLogin\Saml2\Constants::'.$nameIdFormat;
             if (defined($constantName)) {
                 $settings['sp']['nameIdFormat'] = constant($constantName);
             } else {
@@ -48,6 +51,4 @@ class Util
 
         return new Saml2Settings($settings);
     }
-
 }
-

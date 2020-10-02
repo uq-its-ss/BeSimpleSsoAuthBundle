@@ -1,4 +1,7 @@
 <?php
+/**
+ * Forked and maintained by The University of Queensland
+ */
 
 namespace BeSimple\SsoAuthBundle\Buzz;
 
@@ -16,12 +19,20 @@ class AdaptiveClient implements ClientInterface
     private $client;
     private $options;
 
+    /**
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
         $this->options = $options;
         $this->client = function_exists('curl_init') ? new Curl() : new FileGetContents();
     }
 
+    /**
+     * send
+     * @param  RequestInterface $request
+     * @param  MessageInterface $response
+     */
     public function send(RequestInterface $request, MessageInterface $response)
     {
         $this->client->send($request, $response, $this->options);

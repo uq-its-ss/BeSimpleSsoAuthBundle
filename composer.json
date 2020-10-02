@@ -31,7 +31,10 @@
         "symfony/validator": "~3.0",
         "symfony/web-profiler-bundle": "~3.0",
         "symfony/yaml": "~3.0",
-        "symfony/expression-language": "~3.0"
+        "symfony/expression-language": "~3.0",
+        "phpunit/phpunit": "^9.4",
+        "squizlabs/php_codesniffer": "^3.5",
+        "escapestudios/symfony2-coding-standard": "3.x-dev"
     },
     "autoload": {
         "psr-0": { "BeSimple\\SsoAuthBundle": "" }
@@ -41,5 +44,13 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "\"vendor/bin/phpcs\" --config-set installed_paths vendor/escapestudios/symfony2-coding-standard"
+        ],
+        "post-update-cmd": [
+            "\"vendor/bin/phpcs\" --config-set installed_paths vendor/escapestudios/symfony2-coding-standard"
+        ]
     }
 }
