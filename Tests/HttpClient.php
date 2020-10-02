@@ -12,15 +12,29 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * HttpClient
+ */
 class HttpClient implements ClientInterface
 {
-    static protected $kernel;
+    protected static $kernel;
 
-    static public function setKernel(Kernel $kernel)
+    /**
+     * setKernel
+     *
+     * @param Kernel $kernel
+     */
+    public static function setKernel(Kernel $kernel)
     {
         static::$kernel = $kernel;
     }
 
+    /**
+     * send
+     *
+     * @param  BuzzRequest  $buzzRequest
+     * @param  BuzzResponse $buzzResponse
+     */
     public function send(BuzzRequest $buzzRequest, BuzzResponse $buzzResponse)
     {
         $session  = session_id();
@@ -33,11 +47,19 @@ class HttpClient implements ClientInterface
         session_id($session);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setTimeout($timeout)
     {
+        //
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setMaxRedirects($maxRedirects)
     {
+        //
     }
 }

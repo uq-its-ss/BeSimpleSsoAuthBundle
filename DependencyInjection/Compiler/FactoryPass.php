@@ -47,5 +47,4 @@ class FactoryPass implements CompilerPassInterface
             $factoryBuilder->addMethodCall('addConfig', array($attributes[0]['id'], $id));
         }
     }
-
 }
