@@ -33,10 +33,10 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('be_simple_sso_auth');
 
         $serverDefinition = $treeBuilder
-            ->root('be_simple_sso_auth')
+            ->getRootNode()
             ->fixXmlConfig('provider')
             ->useAttributeAsKey('id')
             ->prototype('array');
