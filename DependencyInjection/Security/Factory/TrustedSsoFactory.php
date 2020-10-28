@@ -2,7 +2,7 @@
 
 namespace BeSimple\SsoAuthBundle\DependencyInjection\Security\Factory;
 
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -32,7 +32,7 @@ class TrustedSsoFactory extends AbstractSsoFactory
         $entryPointId = 'security.authentication.trusted_sso_entry_point.'.$id;
 
         $container
-            ->setDefinition($entryPointId, new DefinitionDecorator('security.authentication.trusted_sso_entry_point'))
+            ->setDefinition($entryPointId, new ChildDefinition('security.authentication.trusted_sso_entry_point'))
             ->addArgument($config)
         ;
 

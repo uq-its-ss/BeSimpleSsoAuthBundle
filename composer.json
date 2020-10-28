@@ -17,21 +17,23 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "kriswallsmith/buzz": ">=0.7,<1.0-dev",
-        "symfony/framework-bundle": "~2.1",
-        "symfony/twig-bundle": "~2.1",
-        "symfony/security-bundle": "~2.1",
-        "onelogin/php-saml": "2.1.0"
+        "kriswallsmith/buzz": "^1.0",
+        "symfony/framework-bundle": "^4.0",
+        "symfony/twig-bundle": "^4.0",
+        "symfony/security-bundle": "^4.0",
+        "onelogin/php-saml": "2.1.0",
+        "doctrine/annotations": "~1.0"
     },
     "require-dev": {
-        "symfony/browser-kit": "~2.1",
-        "symfony/css-selector": "~2.1",
-        "symfony/filesystem": "~2.1",
-        "symfony/form": "~2.1",
-        "symfony/validator": "~2.1",
-        "symfony/web-profiler-bundle": "~2.1",
-        "symfony/yaml": "~2.1",
-        "symfony/expression-language": "~2.4"
+        "symfony/browser-kit": "~4.0",
+        "symfony/css-selector": "~4.0",
+        "symfony/filesystem": "~4.0",
+        "symfony/form": "~4.0",
+        "symfony/validator": "~4.0",
+        "symfony/web-profiler-bundle": "~4.0",
+        "symfony/yaml": "~4.0",
+        "symfony/expression-language": "~2.4",
+        "symfony/phpunit-bridge": "^5.1"
     },
     "autoload": {
         "psr-0": { "BeSimple\\SsoAuthBundle": "" }

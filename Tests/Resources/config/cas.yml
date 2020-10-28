@@ -8,7 +8,7 @@ framework:
 services:
     be_simple.sso_auth.server_controller.cas:
         class: BeSimple\SsoAuthBundle\Tests\Controller\Server\CasController
-        arguments: [@service_container]
+        arguments: ["@service_container"]
 
 security:
     firewalls:

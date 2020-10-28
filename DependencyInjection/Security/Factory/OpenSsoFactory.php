@@ -2,7 +2,7 @@
 
 namespace BeSimple\SsoAuthBundle\DependencyInjection\Security\Factory;
 
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 
 /**
  * @author: Jean-François Simon <contact@jfsimon.fr>
@@ -29,7 +29,7 @@ class OpenSsoFactory extends AbstractSsoFactory
         $entryPointId = 'security.authentication.open_sso_entry_point.'.$id;
 
         $container
-            ->setDefinition($entryPointId, new DefinitionDecorator('security.authentication.open_sso_entry_point'))
+            ->setDefinition($entryPointId, new ChildDefinition('security.authentication.open_sso_entry_point'))
             ->addArgument($config)
         ;
 

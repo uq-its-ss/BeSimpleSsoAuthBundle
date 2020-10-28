@@ -14,6 +14,7 @@ class LoginTest extends WebTestCase
      */
     public function testLogin($clientName, $securedUrl, $login, $expectedMessage)
     {
+        self::ensureKernelShutdown();
         $client = $this->createSsoClient($clientName);
         // client follow redirects
         $client->followRedirects();

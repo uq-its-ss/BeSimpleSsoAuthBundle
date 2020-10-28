@@ -20,9 +20,9 @@ class Configuration implements ConfigurationInterface
     /**
      * @param bool $debug
      */
-    public function  __construct($debug)
+    public function __construct($debug)
     {
-        $this->debug = (Boolean) $debug;
+        $this->debug = (bool) $debug;
     }
 
     /**
@@ -30,10 +30,10 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('be_simple_sso_auth');
 
         $serverDefinition = $treeBuilder
-            ->root('be_simple_sso_auth')
+            ->getRootNode()
             ->fixXmlConfig('provider')
             ->useAttributeAsKey('id')
             ->prototype('array');
@@ -58,7 +58,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode($name)
                     ->useAttributeAsKey('id')
                     ->beforeNormalization()
-                        ->ifString()->then(function($value) {
+                        ->ifString()->then(function ($value) {
                             return array('id' => $value);
                         })
                     ->end()

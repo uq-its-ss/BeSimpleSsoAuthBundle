@@ -9,7 +9,6 @@ use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
 use BeSimple\SsoAuthBundle\Sso\Saml\Factory as SamlFactory;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-
 class SamlSsoAuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
 
@@ -49,5 +48,4 @@ class SamlSsoAuthenticationEntryPoint implements AuthenticationEntryPointInterfa
         }
         return new RedirectResponse($manager->getLoginUrl());
     }
-
 }

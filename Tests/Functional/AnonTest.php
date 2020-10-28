@@ -43,6 +43,7 @@ class AnonTest extends WebTestCase
 
     private function processTest($clientName, $url, $expectedMessage)
     {
+        self::ensureKernelShutdown();
         $client = $this->createSsoClient($clientName);
         $crawler = $client->request('GET', $url);
         $message = $crawler->filter('#message')->text();
