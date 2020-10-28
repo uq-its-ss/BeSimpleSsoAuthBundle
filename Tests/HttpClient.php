@@ -5,17 +5,17 @@
 
 namespace BeSimple\SsoAuthBundle\Tests;
 
-use Buzz\Client\BuzzClientInterface;
-use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\RequestInterface;
+use Buzz\Client\ClientInterface;
+use Buzz\Message\RequestInterface as BuzzRequest;
+use Buzz\Message\MessageInterface as BuzzResponse;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpFoundation\Request;
-use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * HttpClient
  */
-class HttpClient implements BuzzClientInterface
+class HttpClient implements ClientInterface
 {
     protected static $kernel;
 
@@ -35,7 +35,7 @@ class HttpClient implements BuzzClientInterface
      * @param  BuzzRequest  $buzzRequest
      * @param  BuzzResponse $buzzResponse
      */
-    public function send(RequestInterface $buzzRequest, MessageInterface $buzzResponse)
+    public function send(BuzzRequest $buzzRequest, BuzzResponse $buzzResponse)
     {
         $session  = session_id();
         $request  = Request::create($buzzRequest->getUrl(), $buzzRequest->getMethod());
@@ -61,12 +61,5 @@ class HttpClient implements BuzzClientInterface
     public function setMaxRedirects($maxRedirects)
     {
         //
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sendRequest(RequestInterface $request, array $options = []): ResponseInterface
-    {
     }
 }
