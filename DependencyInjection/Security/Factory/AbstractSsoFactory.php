@@ -7,7 +7,7 @@ namespace BeSimple\SsoAuthBundle\DependencyInjection\Security\Factory;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -41,7 +41,7 @@ abstract class AbstractSsoFactory extends AbstractFactory
         $provider = 'security.authentication.provider.sso.'.$id;
 
         $container
-            ->setDefinition($provider, new DefinitionDecorator('security.authentication.provider.sso'))
+            ->setDefinition($provider, new ChildDefinition('security.authentication.provider.sso'))
             ->replaceArgument(0, new Reference($userProviderId))
             ->replaceArgument(2, $config['create_users'])
             ->replaceArgument(3, $config['created_users_roles'])
@@ -70,7 +70,7 @@ abstract class AbstractSsoFactory extends AbstractFactory
 
         // don't know if this is the right way, but it works
         $container
-            ->setDefinition($realHandler.'.'.$id, new DefinitionDecorator($templateHandler))
+            ->setDefinition($realHandler.'.'.$id, new ChildDefinition($templateHandler))
             ->addArgument($config)
         ;
     }

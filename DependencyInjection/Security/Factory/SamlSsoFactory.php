@@ -6,9 +6,8 @@
 namespace BeSimple\SsoAuthBundle\DependencyInjection\Security\Factory;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Reference;
-
 
 class SamlSsoFactory extends AbstractSsoFactory
 {
@@ -34,7 +33,7 @@ class SamlSsoFactory extends AbstractSsoFactory
         $provider = 'security.authentication.provider.saml_sso.'.$id;
 
         $container
-            ->setDefinition($provider, new DefinitionDecorator('security.authentication.provider.saml_sso'))
+            ->setDefinition($provider, new ChildDefinition('security.authentication.provider.saml_sso'))
             ->replaceArgument(0, new Reference($userProviderId))
             ->replaceArgument(2, $config['create_users'])
             ->replaceArgument(3, $config['created_users_roles'])
@@ -48,7 +47,7 @@ class SamlSsoFactory extends AbstractSsoFactory
         $entryPointId = 'security.authentication.saml_sso_entry_point.'.$id;
 
         $container
-            ->setDefinition($entryPointId, new DefinitionDecorator('security.authentication.saml_sso_entry_point'))
+            ->setDefinition($entryPointId, new ChildDefinition('security.authentication.saml_sso_entry_point'))
             ->addArgument($config)
         ;
 
