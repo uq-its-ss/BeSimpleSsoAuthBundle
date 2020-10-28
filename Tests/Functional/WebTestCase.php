@@ -32,13 +32,14 @@ abstract class WebTestCase extends BaseWebTestCase
 
     protected function createSsoClient($name)
     {
+        self::ensureKernelShutdown();
         return static::createClient(array('sso_server_name' => $name));
     }
 
     protected function getXml(Crawler $crawler)
     {
         $document = new \DOMDocument('1.0', 'utf-8');
-        $crawler->each(function(\DOMElement $node) use ($document) {
+        $crawler->each(function (\DOMElement $node) use ($document) {
             $document->appendChild($document->importNode($node, true));
         });
         return html_entity_decode($document->saveXML());

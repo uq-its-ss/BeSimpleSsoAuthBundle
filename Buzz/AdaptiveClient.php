@@ -5,16 +5,16 @@
 
 namespace BeSimple\SsoAuthBundle\Buzz;
 
-use Buzz\Client\ClientInterface;
+use Buzz\Client\BuzzClientInterface;
 use Buzz\Client\Curl;
 use Buzz\Client\FileGetContents;
-use Buzz\Message\MessageInterface;
-use Buzz\Message\RequestInterface;
+use Psr\Http\Message\MessageInterface;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * @author: Jean-François Simon <contact@jfsimon.fr>
  */
-class AdaptiveClient implements ClientInterface
+class AdaptiveClient implements BuzzClientInterface
 {
     private $client;
     private $options;
