@@ -23,9 +23,9 @@ class Configuration implements ConfigurationInterface
     /**
      * @param bool $debug
      */
-    public function  __construct($debug)
+    public function __construct($debug)
     {
-        $this->debug = (Boolean) $debug;
+        $this->debug = (bool) $debug;
     }
 
     /**
@@ -61,7 +61,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode($name)
                     ->useAttributeAsKey('id')
                     ->beforeNormalization()
-                        ->ifString()->then(function($value) {
+                        ->ifString()->then(function ($value) {
                             return array('id' => $value);
                         })
                     ->end()

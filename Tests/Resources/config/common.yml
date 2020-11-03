@@ -3,7 +3,6 @@ framework:
     csrf_protection:
         enabled: true
     validation:    { enabled: true, enable_annotations: true }
-    templating:    { engines: ["twig"] }
     form: ~
     test: ~
     session:
@@ -12,21 +11,21 @@ framework:
 
 services:
     logger:
-        class: Symfony\Component\HttpKernel\Log\NullLogger
+        class: Psr\Log\NullLogger
     be_simple.sso_auth.test_controller.test:
         class: BeSimple\SsoAuthBundle\Tests\Controller\TestController
-        arguments: [@service_container]
+        arguments: ["@service_container"]
     be_simple.sso_auth.test_controller.trusted:
         class: BeSimple\SsoAuthBundle\Tests\Controller\TrustedSsoController
-        arguments: [@service_container]
+        arguments: ["@service_container"]
     be_simple.sso_auth.client:
         class: BeSimple\SsoAuthBundle\Tests\HttpClient
 
 twig:
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
     paths:
-        - %kernel.root_dir%/Resources/views
+        - "%kernel.root_dir%/Resources/views"
 
 security:
     encoders:

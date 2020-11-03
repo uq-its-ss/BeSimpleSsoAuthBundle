@@ -69,7 +69,7 @@
         </service>
 
         <service id="security.authentication.sso.authentication_failure_handler" class="%security.authentication.sso_authentication_failure_handler.class%" abstract="false">
-            <argument type="service" id="templating" />
+            <argument type="service" id="twig" />
         </service>
     </services>
 </container>
