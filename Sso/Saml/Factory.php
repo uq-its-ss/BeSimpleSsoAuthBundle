@@ -82,5 +82,4 @@ class Factory
 
         return $this->container->get($this->configs[$id])->setConfig($config);
     }
-
 }

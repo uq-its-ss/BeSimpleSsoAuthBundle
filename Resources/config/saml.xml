@@ -9,8 +9,9 @@
     </parameters>
 
     <services>
-        <service id="be_simple.sso_auth.saml_config" class="%be_simple.sso_auth.saml_config.class%">
+        <service id="BeSimple\SsoAuthBundle\Sso\Saml\Config" public="true">
             <tag name="be_simple.sso_auth.saml_config" id="saml"/>
         </service>
+        <service id="be_simple.sso_auth.saml_config" alias="BeSimple\SsoAuthBundle\Sso\Saml\Config"/>
     </services>
 </container>
